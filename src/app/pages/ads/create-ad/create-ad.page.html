@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/ads"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Create New Ad</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="adForm" (ngSubmit)="onSubmit()">
+    <ion-list>
+      <ion-item>
+        <ion-label position="stacked">Title</ion-label>
+        <ion-input formControlName="title" type="text" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Description</ion-label>
+        <ion-textarea formControlName="description" rows="4" required></ion-textarea>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Category</ion-label>
+        <ion-select formControlName="category" required>
+          <ion-select-option value="Electronics">Electronics</ion-select-option>
+          <ion-select-option value="Fashion">Fashion</ion-select-option>
+          <ion-select-option value="Services">Services</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Start Date</ion-label>
+        <ion-datetime formControlName="startDate" presentation="date"></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">End Date</ion-label>
+        <ion-datetime formControlName="endDate" presentation="date"></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Upload Image</ion-label>
+        <input type="file" accept="image/*" (change)="onImageSelected($event)">
+      </ion-item>
+
+      <ion-item *ngIf="selectedImage">
+        <img [src]="selectedImage" style="max-width: 100%; height: auto;">
+      </ion-item>
+
+      <ion-item formGroupName="location">
+        <ion-label position="stacked">Location</ion-label>
+        <ion-input formControlName="address" type="text" placeholder="Search location..." required></ion-input>
+      </ion-item>
+
+      <!-- Map will be added here -->
+      <div style="height: 300px; background-color: #eee; margin: 16px;">
+        Map Component Placeholder
+      </div>
+    </ion-list>
+
+    <div class="ion-padding">
+      <ion-button expand="block" type="submit" [disabled]="!adForm.valid">
+        Create Ad
+      </ion-button>
+    </div>
+  </form>
+</ion-content>
